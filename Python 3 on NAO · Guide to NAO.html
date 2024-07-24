@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<!-- saved from url=(0071)https://naosclassroom.github.io/guide-to-nao/nao/2023-11-10-nao-python3 -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="chrome-extension://fgddmllnllkalaagkghckoinaemmogpe/scripts/content/gps.js"></script>
+<title>Python 3 on NAO · Guide to NAO</title><meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Some documentation for NAO.
+"><meta name="generator" content="Jekyll (using style of GitBook 3.2.3)"><meta name="author" content="Emile Kroeger"><link rel="stylesheet" href="./Python 3 on NAO · Guide to NAO_files/style.css">
+<link rel="stylesheet" href="./Python 3 on NAO · Guide to NAO_files/website.css">
+<link rel="stylesheet" href="./Python 3 on NAO · Guide to NAO_files/search.css">
+<link rel="stylesheet" href="./Python 3 on NAO · Guide to NAO_files/plugin.css">
+
+<link rel="stylesheet" href="./Python 3 on NAO · Guide to NAO_files/colorful.css">
+
+<link rel="stylesheet" href="./Python 3 on NAO · Guide to NAO_files/custom.css">
+<link rel="stylesheet" href="./Python 3 on NAO · Guide to NAO_files/custom-local.css">
+
+<meta name="HandheldFriendly" content="true">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://naosclassroom.github.io/guide-to-nao/assets/gitbook/images/apple-touch-icon-precomposed-152.png">
+<link rel="shortcut icon" href="https://naosclassroom.github.io/guide-to-nao//assets/favicon.ico" type="image/x-icon">
+
+
+
+
+            <link rel="prev" href="https://naosclassroom.github.io/guide-to-nao/nao/2023-11-09-nao-python.html">
+        
+
+        
+            <link rel="next" href="https://naosclassroom.github.io/guide-to-nao/nao/2023-11-20-nao-ros.html">
+        
+    <style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+</style></head>
+    <body>
+        <div class="book without-animation with-summary font-size-2 font-family-1"><div class="book-summary">
+    <script type="text/javascript">
+        // Fixes the page links scroll problem on both desktop and mobile browsers
+        function pageScrollToTop(element) {
+            // both mobile and non-mobile
+            $('div.body-inner').animate({scrollTop: 0});
+            $(element).parent().find('li>ul>li').removeClass('active');
+            return true;  // propagate
+        }
+        // Fixes the anchor links scroll problem on mobile browsers
+        function mobilePageScrollToAnchor(element) {
+            $(element).closest('li.chapter').find('ul>li').removeClass('active');
+            $(element).parent().addClass('active');
+            if ($(document).width() <= 1240) {
+                $('div.body-inner').animate({scrollTop: $($(element).attr('href')).get(0).offsetTop});
+            }
+            return true;
+        }
+    </script>
+
+    <nav role="navigation">
+        <div id="book-search-input" role="search">
+            <input type="text" placeholder="Type to search">
+        </div>
+        <div id="book-search-input-link" role="search">
+            <a href="https://naosclassroom.github.io/guide-to-nao/assets/search.html">Click to Search</a>
+        </div>
+        <ul class="summary">
+            
+            <li class="chapter" data-level="1.1" data-path="/guide-to-nao">
+            
+                <a href="https://naosclassroom.github.io/guide-to-nao/" onclick="pageScrollToTop(this)">
+                    Guide to NAO
+                </a>
+            </li>
+
+            <li class="divider"></li>
+
+            
+                <!-- <p>pages</p> -->
+                
+                    
+
+                    
+                        
+                        <li class="chapter" data-level="1.1" data-path="/guide-to-nao/pages/about/">
+                        
+                            <a href="https://naosclassroom.github.io/guide-to-nao/pages/about/" onclick="pageScrollToTop(this)">
+                                About
+                            </a>
+                            
+                                
+                            
+                        </li>
+                    
+                        
+                        <li class="chapter" data-level="1.1" data-path="/guide-to-nao/pages/contact/">
+                        
+                            <a href="https://naosclassroom.github.io/guide-to-nao/pages/contact/" onclick="pageScrollToTop(this)">
+                                Contact
+                            </a>
+                            
+                                
+                            
+                        </li>
+                    
+
+                    
+                        <li class="divider"></li>
+                    
+                
+            
+                <!-- <p>posts</p> -->
+                
+                    
+
+                    
+                        
+                        <li class="chapter" data-level="1.1" data-path="/guide-to-nao/nao/2023-11-09-nao-python.html">
+                        
+                            <a href="https://naosclassroom.github.io/guide-to-nao/nao/2023-11-09-nao-python.html" onclick="pageScrollToTop(this)">
+                                Python 2 on NAO
+                            </a>
+                            
+                                
+                            
+                        </li>
+                    
+                        
+                        <li class="chapter active" data-level="1.2" data-path="/guide-to-nao/nao/2023-11-10-nao-python3.html">
+                        
+                            <a href="https://naosclassroom.github.io/guide-to-nao/nao/2023-11-10-nao-python3.html" onclick="pageScrollToTop(this)">
+                                Python 3 on NAO
+                            </a>
+                            
+                                
+                                    <ul><li><a href="https://naosclassroom.github.io/guide-to-nao/nao/2023-11-10-nao-python3#installation" onclick="mobilePageScrollToAnchor(this)">Installation</a></li><li><a href="https://naosclassroom.github.io/guide-to-nao/nao/2023-11-10-nao-python3#building-applications" onclick="mobilePageScrollToAnchor(this)">Building applications</a><ul><li><a href="https://naosclassroom.github.io/guide-to-nao/nao/2023-11-10-nao-python3#starting-from-a-template" onclick="mobilePageScrollToAnchor(this)">Starting from a template</a></li><li><a href="https://naosclassroom.github.io/guide-to-nao/nao/2023-11-10-nao-python3#building-or-adapting-your-own" onclick="mobilePageScrollToAnchor(this)">Building or adapting your own</a></li><li><a href="https://naosclassroom.github.io/guide-to-nao/nao/2023-11-10-nao-python3#installing-the-app-on-nao" onclick="mobilePageScrollToAnchor(this)">Installing the app on NAO</a></li></ul></li><li><a href="https://naosclassroom.github.io/guide-to-nao/nao/2023-11-10-nao-python3#usage-in-command-line" onclick="mobilePageScrollToAnchor(this)">Usage in command line</a></li><li><a href="https://naosclassroom.github.io/guide-to-nao/nao/2023-11-10-nao-python3#api-reference" onclick="mobilePageScrollToAnchor(this)">API Reference</a></li><li><a href="https://naosclassroom.github.io/guide-to-nao/nao/2023-11-10-nao-python3#faq" onclick="mobilePageScrollToAnchor(this)">FAQ</a><ul><li><a href="https://naosclassroom.github.io/guide-to-nao/nao/2023-11-10-nao-python3#can-i-also-use-it-on-my-computer" onclick="mobilePageScrollToAnchor(this)">Can I also use it on my computer?</a></li><li><a href="https://naosclassroom.github.io/guide-to-nao/nao/2023-11-10-nao-python3#why-runpy3sh" onclick="mobilePageScrollToAnchor(this)">Why runpy3.sh?</a></li><li><a href="https://naosclassroom.github.io/guide-to-nao/nao/2023-11-10-nao-python3#isnt-python-3-already-installed-on-the-system" onclick="mobilePageScrollToAnchor(this)">Isn’t Python 3 already installed on the system?</a></li><li><a href="https://naosclassroom.github.io/guide-to-nao/nao/2023-11-10-nao-python3#why-doesnt-alproxy-work" onclick="mobilePageScrollToAnchor(this)">Why doesn’t ALProxy work?</a></li></ul></li></ul>
+
+                                
+                            
+                        </li>
+                    
+                        
+                        <li class="chapter" data-level="1.1" data-path="/guide-to-nao/nao/2023-11-20-nao-ros.html">
+                        
+                            <a href="https://naosclassroom.github.io/guide-to-nao/nao/2023-11-20-nao-ros.html" onclick="pageScrollToTop(this)">
+                                ROS for NAO
+                            </a>
+                            
+                                
+                            
+                        </li>
+                    
+
+                    
+                        <li class="divider"></li>
+                    
+                
+            
+
+        </ul>
+    </nav>
+</div>
+<div class="book-body">
+                <div class="book-header" role="navigation">
+                    <!-- Title -->
+                    <a class="btn pull-left js-toolbar-action" aria-label="" href="https://naosclassroom.github.io/guide-to-nao/nao/2023-11-10-nao-python3#"><i class="fa fa-align-justify"></i></a><div class="dropdown pull-left font-settings js-toolbar-action"><a class="btn toggle-dropdown" aria-label="Font Settings" href="https://naosclassroom.github.io/guide-to-nao/nao/2023-11-10-nao-python3#"><i class="fa fa-font"></i></a><div class="dropdown-menu dropdown-right"><div class="dropdown-caret"><span class="caret-outer"></span><span class="caret-inner"></span></div><div class="buttons"><button class="button size-2 font-reduce">A</button><button class="button size-2 font-enlarge">A</button></div><div class="buttons"><button class="button size-2 ">Serif</button><button class="button size-2 ">Sans</button></div><div class="buttons"><button class="button size-3 ">White</button><button class="button size-3 ">Sepia</button><button class="button size-3 ">Night</button></div></div></div><div class="dropdown pull-right js-toolbar-action"><a class="btn toggle-dropdown" aria-label="Share" href="https://naosclassroom.github.io/guide-to-nao/nao/2023-11-10-nao-python3#"><i class="fa fa-share-alt"></i></a><div class="dropdown-menu dropdown-left"><div class="dropdown-caret"><span class="caret-outer"></span><span class="caret-inner"></span></div><div class="buttons"><button class="button size-7 ">Facebook</button><button class="button size-7 ">Google+</button><button class="button size-7 ">Twitter</button><button class="button size-7 ">Weibo</button><button class="button size-7 ">Instapaper</button><button class="button size-7 ">Github</button><button class="button size-7 ">Telegram</button></div></div></div><a class="btn pull-right js-toolbar-action" aria-label="" href="https://naosclassroom.github.io/guide-to-nao/nao/2023-11-10-nao-python3#"><i class="fa fa-facebook"></i></a><a class="btn pull-right js-toolbar-action" aria-label="" href="https://naosclassroom.github.io/guide-to-nao/nao/2023-11-10-nao-python3#"><i class="fa fa-twitter"></i></a><a class="btn pull-right js-toolbar-action" aria-label="" href="https://naosclassroom.github.io/guide-to-nao/nao/2023-11-10-nao-python3#"><i class="fa fa-github"></i></a><h1>
+                        <i class="fa fa-circle-o-notch fa-spin"></i>
+                        
+                            <a href="https://naosclassroom.github.io/guide-to-nao/nao/">Python 3 on NAO</a>
+                        
+                    </h1>
+                </div>
+
+                <div class="body-inner"><div class="page-wrapper" tabindex="-1" role="main">
+    
+
+    <div class="page-inner">
+        <div id="book-search-results">
+            <div class="search-noresults">
+                <section class="normal markdown-section">
+                    
+                        <h1 id="/nao/nao-python3">Python 3 on NAO</h1>
+                    
+
+                    <p>By default; NAO and Choregraphe work with Python 2. It’s possible to add Python 3 as an extra package, but note that it will not work in Choregraphe boxes, only in scripts (that can be used in Choregraphe projects to make Python 3 apps).</p>
+
+<h1 id="installation">Installation</h1>
+
+<p>Having Python 3 on your NAO will require installing <a href="https://cloud.aldebaran-robotics.com/application/python3nao/">the python3nao package</a>, which contains Python 3 as well as libraries such as <code class="language-plaintext highlighter-rouge">qi</code> and <code class="language-plaintext highlighter-rouge">numpy</code>. You will need an Aldebaran account to be able to install the packages.</p>
+
+<h1 id="building-applications">Building applications</h1>
+
+<p>NAO Applications are very convenient, they can be linked to dialog, to webpages, they can be started and stopped via Choregraphe, they can be published to <a href="https://cloud.aldebaran.com/">cloud.aldebaran.com</a>.</p>
+
+<h2 id="starting-from-a-template">Starting from a template</h2>
+
+<p>As a simple starting point, you can clone this example project:</p>
+<ul>
+  <li><a href="https://github.com/EmileKroeger/mini_python3_nao_app">github.com/EmileKroeger/mini_python3_nao_app</a></li>
+</ul>
+
+<p>You can also use <a href="https://cookiecutter.readthedocs.io/en/stable/">cookiecutter</a> to generate new projects from this template:</p>
+<ul>
+  <li><a href="https://github.com/EmileKroeger/cookiecutter_naoapp">github.com/EmileKroeger/cookiecutter_naoapp</a></li>
+</ul>
+
+<p>(this will be more convenient than going around changing the Application name and ID in various places in the project)</p>
+
+<h2 id="building-or-adapting-your-own">Building or adapting your own</h2>
+
+<p>If you want to build your own app, the important part is to include this line in your manifest.xml (adapting to your script):</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight" style="position: relative;"><code> <span class="nt">&lt;services&gt;</span>
+  <span class="nt">&lt;service</span> <span class="na">execStart=</span><span class="s">"/home/nao/.local/share/PackageManager/apps/python3nao/bin/runpy3.sh  scripts/yourscript.py"</span> <span class="na">name=</span><span class="s">"yourappname"</span> <span class="na">autorun=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+ <span class="nt">&lt;/services&gt;</span>
+</code><button class="copy-code-button" style="position: absolute; top: 5px; right: 5px; padding: 3px; background-color: rgb(49, 62, 78); color: white; border-radius: 5px; border: 2px solid rgb(204, 204, 204);">Copy</button></pre></div></div>
+
+<p>You can use this to build apps and services; you can look at  <a href="https://github.com/aldebaran/robot-jumpstarter/tree/master">robot-jumpstarter</a> project has some Python 2 templates that could be adapted.</p>
+
+<h2 id="installing-the-app-on-nao">Installing the app on NAO</h2>
+
+<p>You can open these projects with Choregraphe; however there is an issue (as of November 2030) whereby Choregraphe runs a linter on the code that excepts Python 2, and it might recognize some Python 3 syntax as “invalid” and not install the package.</p>
+
+<p>As a workaround, you can install to the robot with <a href="http://doc.aldebaran.com/qibuild/beginner/qipkg/tutorial.html">qipkg</a>, which you can install with <code class="language-plaintext highlighter-rouge">pip install qipkg</code>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight" style="position: relative;"><code>qipkg deploy-package ./app/my_app.pml --url nao@nao.local
+</code><button class="copy-code-button" style="position: absolute; top: 5px; right: 5px; padding: 3px; background-color: rgb(49, 62, 78); color: white; border-radius: 5px; border: 2px solid rgb(204, 204, 204);">Copy</button></pre></div></div>
+
+<p>Note that this requires that your .pml file properly index all the files in your package.</p>
+
+<h1 id="usage-in-command-line">Usage in command line</h1>
+
+<p>If you just want to do command-line usage without the whole application packaging, you can simply execute <code class="language-plaintext highlighter-rouge">/home/nao/.local/share/PackageManager/apps/python3nao/bin/runpy3.sh</code> to get a python console, or pass your script to that (it can be worth creating a symbolic link).</p>
+
+<h1 id="api-reference">API Reference</h1>
+
+<p>You can find the API reference <a href="http://doc.aldebaran.com/2-8/naoqi/index.html">in the official documentation</a> (examples given are for Python 2, often with the older ALProxy-based approach), but the APIs work the same.</p>
+
+<h1 id="faq">FAQ</h1>
+
+<h2 id="can-i-also-use-it-on-my-computer">Can I also use it on my computer?</h2>
+
+<p>Sure, you can do this without any extra package; just <code class="language-plaintext highlighter-rouge">pip3 install qi</code> might work (depending of your environment), and if it doesn’t, rebuild <a href="https://github.com/aldebaran/libqi-python">libqi-python</a> from source as explained there.</p>
+
+<h2 id="why-runpy3sh">Why runpy3.sh?</h2>
+
+<p>On NAO, the <code class="language-plaintext highlighter-rouge">PYTHONPATH</code> environment variable is set to include a folder containing the Python 2.7 version of the qi library; so if you just directly use the <code class="language-plaintext highlighter-rouge">python3</code> in the package and do <code class="language-plaintext highlighter-rouge">import qi</code>, it will find the Python 2.7 library first, and fail.</p>
+
+<h2 id="isnt-python-3-already-installed-on-the-system">Isn’t Python 3 already installed on the system?</h2>
+
+<p>Yes, there is actually already a Python 3.5 installed on NAO, but it does not include <code class="language-plaintext highlighter-rouge">qi</code> or <code class="language-plaintext highlighter-rouge">naoqi</code> libraries and so cannot be used for controlling the robot.</p>
+
+<h2 id="why-doesnt-alproxy-work">Why doesn’t ALProxy work?</h2>
+
+<p>ALProxy is part of the deprecated <code class="language-plaintext highlighter-rouge">naoqi</code> library that is not in the package; use the <code class="language-plaintext highlighter-rouge">qi</code> library instead, it offers the same functionality (and more) with a slightly different syntax.</p>
+</section>
+            </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class="search-results-count"></span> results matching "<span class="search-query"></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class="search-query"></span>"</h1>
+    </div>
+</div></div>
+    </div>
+<div class="back-to-top" style="display: none;"><i class="fa fa-arrow-up"></i></div></div>
+
+<!-- introduce mathjax support -->
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [ ['$', '$'], ['\\(', '\\)'] ]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async="" src="./Python 3 on NAO · Guide to NAO_files/tex-chtml.js.download">
+</script>
+
+
+<!-- introduce per-page mermaid support -->
+
+
+                        <a href="https://naosclassroom.github.io/guide-to-nao/nao/2023-11-09-nao-python.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Python 2 on NAO">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                    
+
+                    
+                        <a href="https://naosclassroom.github.io/guide-to-nao/nao/2023-11-20-nao-ros.html" class="navigation navigation-next navigation-unique" aria-label="Next page: ROS for NAO" style="margin-right: 5px;">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    
+                </div>
+            </div>
+
+            <script>
+            var gitbook = gitbook || [];
+            gitbook.push(function() {
+                gitbook.page.hasChanged({
+    "page": {
+        "title": "Introduction",
+        "level": "1.1",
+        "depth": 1,
+        
+        "next": {
+            "title": "ROS for NAO",
+            "level": "1.2",
+            "depth": 1,
+            "path": "_posts/2023-11-20-nao-ros.md",
+            "ref": "_posts/2023-11-20-nao-ros.md",
+            "articles": []
+        },
+        
+        "dir": "ltr"
+    },    "config": {
+        "plugins": ["fontsettings", "highlight", "livereload", "lunr", "search", "sharing", "theme-default", "livereload"],
+        "styles": {
+            "ebook": "styles/ebook.css",
+            "epub": "styles/epub.css",
+            "mobi": "styles/mobi.css",
+            "pdf": "styles/pdf.css",
+            "print": "styles/print.css",
+            "website": "styles/website.css"
+        },
+        "pluginsConfig": {
+            "fontsettings": {
+                "family": "sans",
+                "size": 2,
+                "theme": "white"
+            },
+            "highlight": {},
+            "livereload": {},
+            "lunr": {
+                "ignoreSpecialCharacters": false,
+                "maxIndexSize": 1000000
+            },
+            "search": {},            "sharing": {
+                "facebook": true,
+
+                "google": false,
+
+                "github": true,
+              
+                "github_link": "https://github.com",
+              
+
+                "telegram": false,
+                "telegram_link": "https://t.me",
+
+                "instapaper": false,
+
+                "twitter": true,
+              
+
+                "vk": false,
+
+                "weibo": false,
+
+                "all": ["facebook", "google", "twitter", "weibo", "instapaper", "github", "telegram"]
+            },
+"theme-default": {
+                "showLevel": false,
+                "styles": {
+                    "ebook": "styles/ebook.css",
+                    "epub": "styles/epub.css",
+                    "mobi": "styles/mobi.css",
+                    "pdf": "styles/pdf.css",
+                    "print": "styles/print.css",
+                    "website": "styles/website.css"
+                }
+            }
+        },
+        "theme": "default",
+        "author": "Tao He",
+        "pdf": {
+            "pageNumbers": true,
+            "fontSize": 12,
+            "fontFamily": "Arial",
+            "paperSize": "a4",
+            "chapterMark": "pagebreak",
+            "pageBreaksBefore": "/",
+            "margin": {
+                "right": 62,
+                "left": 62,
+                "top": 56,
+                "bottom": 56
+            }
+        },
+        "structure": {
+            "langs": "LANGS.md",
+            "readme": "README.md",
+        },
+        "variables": {},
+        "title": "Guide to NAO",
+        "language": "en",
+        "gitbook": "*"
+    },
+    "file": {
+        "path": "_posts/2023-11-10-nao-python3.md",
+        "mtime": "2023-11-10 00:00:00 +0000",
+        "type": "markdown"
+    },
+    "gitbook": {
+        "version": "3.2.3",
+        "time": "2023-11-30 15:17:22 +0000"
+    },
+    "basePath": "/guide-to-nao",
+    "book": {
+        "language": ""
+    }
+});
+            });
+            </script>
+        </div><script src="./Python 3 on NAO · Guide to NAO_files/gitbook.js.download"></script>
+<script src="./Python 3 on NAO · Guide to NAO_files/theme.js.download"></script>
+
+<script src="./Python 3 on NAO · Guide to NAO_files/fontsettings.js.download"></script>
+<script src="./Python 3 on NAO · Guide to NAO_files/buttons.js.download"></script>
+
+<script src="./Python 3 on NAO · Guide to NAO_files/jquery.mark.min.js.download"></script>
+<script src="./Python 3 on NAO · Guide to NAO_files/search.js.download"></script>
+<script src="./Python 3 on NAO · Guide to NAO_files/plugin.js.download"></script>
+<script src="./Python 3 on NAO · Guide to NAO_files/toggle.js.download"></script>
+
+
+</body></html>
